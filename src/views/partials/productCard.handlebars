@@ -1,0 +1,18 @@
+<article class="product-card">
+  <div class="product-image">
+    {{#if thumbnails.length}}
+      <img src="{{thumbnails.[0]}}" alt="{{title}}">
+    {{else}}
+      <img src="/img/placeholder.png" alt="Producto sin imagen">
+    {{/if}}
+  </div>
+
+  <div class="product-content">
+    <span class="category">{{category}}</span>
+    <h3>{{title}}</h3>
+    <p>{{description}}</p>
+    <p class="price">S/ {{formatPrice price}}</p>
+    <p class="stock">Stock: {{stock}}</p>
+    <a class="button" href="/products/{{_id}}">Ver detalle</a>
+  </div>
+</article>

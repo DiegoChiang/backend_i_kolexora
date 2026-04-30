@@ -1,0 +1,90 @@
+<section class="hero">
+  <h1>Catálogo de Kolexora</h1>
+  <p>Figuras, funkos, nendos y coleccionables para fans de la cultura pop.</p>
+</section>
+
+<section class="catalog-toolbar panel">
+  <div class="toolbar-header">
+    <div>
+      <h2>Explorar productos</h2>
+      <p>Busca, filtra y ordena el catálogo de coleccionables.</p>
+    </div>
+
+    <span class="results-counter">
+      Mostrando {{productsCount}} de {{totalDocs}} productos
+    </span>
+  </div>
+
+  <form class="catalog-form" action="/products" method="GET">
+    <input type="hidden" name="page" value="1">
+    <input type="hidden" name="limit" value="12">
+
+    <div class="field search-field">
+      <label for="search">Buscar</label>
+      <input
+        id="search"
+        type="text"
+        name="search"
+        placeholder="Nombre, descripción o código"
+        value="{{search}}"
+      >
+    </div>
+
+    <div class="field">
+      <label for="category">Categoría</label>
+      <div class="select-wrapper">
+        <select id="category" name="category" class="filter-select">
+          <option value="" {{#if (eq category "")}}selected{{/if}}>Todas las categorías</option>
+          <option value="Funkos" {{#if (eq category "Funkos")}}selected{{/if}}>Funkos</option>
+          <option value="Nendoroids" {{#if (eq category "Nendoroids")}}selected{{/if}}>Nendoroids</option>
+          <option value="Figuras" {{#if (eq category "Figuras")}}selected{{/if}}>Figuras</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="available">Disponibilidad</label>
+      <div class="select-wrapper">
+        <select id="available" name="available" class="filter-select">
+          <option value="" {{#if (eq available "")}}selected{{/if}}>Todos</option>
+          <option value="true" {{#if (eq available "true")}}selected{{/if}}>Solo disponibles</option>
+          <option value="false" {{#if (eq available "false")}}selected{{/if}}>No disponibles</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="sort">Ordenar por</label>
+      <div class="select-wrapper">
+        <select id="sort" name="sort" class="filter-select">
+          <option value="" {{#if (eq sort "")}}selected{{/if}}>Orden por defecto</option>
+          <option value="price-asc" {{#if (eq sort "price-asc")}}selected{{/if}}>Precio: menor a mayor</option>
+          <option value="price-desc" {{#if (eq sort "price-desc")}}selected{{/if}}>Precio: mayor a menor</option>
+          <option value="title-asc" {{#if (eq sort "title-asc")}}selected{{/if}}>Nombre: A-Z</option>
+          <option value="title-desc" {{#if (eq sort "title-desc")}}selected{{/if}}>Nombre: Z-A</option>
+          <option value="stock-desc" {{#if (eq sort "stock-desc")}}selected{{/if}}>Mayor stock</option>
+          <option value="stock-asc" {{#if (eq sort "stock-asc")}}selected{{/if}}>Menor stock</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field actions-field">
+      <button class="button" type="submit">Aplicar filtros</button>
+      <a class="button secondary" href="/products">Limpiar</a>
+    </div>
+  </form>
+</section>
+
+<section class="grid">
+  {{#each products}}
+    {{> productCard}}
+  {{else}}
+    <div class="empty-state">
+      <h3>No se encontraron productos</h3>
+      <p>Prueba cambiando la búsqueda, categoría, disponibilidad u ordenamiento.</p>
+      <a class="button" href="/products">Ver todo el catálogo</a>
+    </div>
+  {{/each}}
+</section>
+
+{{> pagination}}

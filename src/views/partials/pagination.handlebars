@@ -1,0 +1,11 @@
+<nav class="pagination">
+  {{#if hasPrevPage}}
+    <a class="button secondary" href="{{prevLink}}">Página anterior</a>
+  {{/if}}
+
+  <span>Página {{page}} de {{totalPages}}</span>
+
+  {{#if hasNextPage}}
+    <a class="button secondary" href="{{nextLink}}">Página siguiente</a>
+  {{/if}}
+</nav>

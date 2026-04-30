@@ -1,0 +1,68 @@
+<section class="hero">
+  <h1>Carrito</h1>
+  <p>ID: {{cart._id}}</p>
+</section>
+
+<section class="cart-toolbar">
+  <a class="button secondary" href="/products">Seguir comprando</a>
+
+  {{#if cart.products.length}}
+    <button class="button danger" id="clearCartButton" data-cart-id="{{cart._id}}">
+      Vaciar carrito
+    </button>
+  {{/if}}
+</section>
+
+<section class="cart-list" data-cart-id="{{cart._id}}">
+  {{#each cart.products}}
+    <article class="cart-item" data-product-id="{{this.product._id}}">
+      <div class="cart-product-info">
+        <h3>{{this.product.title}}</h3>
+        <p>{{this.product.description}}</p>
+        <p>Categoría: {{this.product.category}}</p>
+        <p>Precio unitario: S/ {{formatPrice this.product.price}}</p>
+      </div>
+
+      <div class="cart-product-actions">
+        <label>Cantidad</label>
+
+        <div class="quantity-control">
+          <button class="quantity-btn decrease-cart-quantity" type="button">-</button>
+
+          <input
+            class="cart-quantity-input"
+            type="number"
+            min="1"
+            value="{{this.quantity}}"
+          >
+
+          <button class="quantity-btn increase-cart-quantity" type="button">+</button>
+        </div>
+
+        <p class="cart-subtotal">
+          Subtotal: S/ {{formatPrice (multiply this.quantity this.product.price)}}
+        </p>
+
+        <div class="cart-item-buttons">
+          <button class="button update-quantity-button" type="button">
+            Actualizar cantidad
+          </button>
+
+          <button class="button danger remove-product-button" type="button">
+            Eliminar producto
+          </button>
+        </div>
+      </div>
+    </article>
+  {{else}}
+    <div class="empty-state">
+      <h3>Este carrito está vacío</h3>
+      <p>Agrega productos desde el catálogo para empezar tu compra.</p>
+      <a class="button" href="/products">Ver productos</a>
+    </div>
+  {{/each}}
+</section>
+
+<p id="cartMessage"></p>
+
+<script src="/js/cart.js"></script>

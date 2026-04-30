@@ -1,0 +1,39 @@
+<section class="hero">
+  <h1>Productos en tiempo real</h1>
+  <p>Cuando se crean, actualizan o eliminan productos, esta vista se actualiza automáticamente.</p>
+</section>
+
+<section class="panel">
+  <h2>Crear producto rápido</h2>
+
+  <form id="createProductForm" class="form-grid">
+    <input name="title" placeholder="Título" required>
+    <input name="description" placeholder="Descripción" required>
+    <input name="code" placeholder="Código único" required>
+    <input name="price" type="number" placeholder="Precio" required>
+    <input name="stock" type="number" placeholder="Stock" required>
+    <div class="select-wrapper">
+      <select name="category" class="category-select" required>
+        <option value="" selected disabled>Selecciona una categoría</option>
+        <option value="Funkos">Funkos</option>
+        <option value="Nendoroids">Nendoroids</option>
+        <option value="Figuras">Figuras</option>
+      </select>
+    </div>
+    <input name="thumbnails" placeholder="URL de imagen opcional">
+    <button class="button" type="submit">Crear producto</button>
+  </form>
+
+  <p id="realTimeMessage"></p>
+</section>
+
+<section id="realTimeProductsList" class="grid">
+  {{#each products}}
+    {{> productCard}}
+  {{else}}
+    <p>No hay productos disponibles.</p>
+  {{/each}}
+</section>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realTimeProducts.js"></script>

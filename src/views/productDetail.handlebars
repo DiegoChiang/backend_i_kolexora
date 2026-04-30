@@ -1,0 +1,63 @@
+<section class="detail" data-product-id="{{product._id}}">
+  <div class="detail-image">
+    {{#if product.thumbnails.length}}
+      <img 
+        src="{{product.thumbnails.[0]}}" 
+        alt="{{product.title}}"
+        onerror="this.src='/img/placeholder.png'"
+      >
+    {{else}}
+      <img src="/img/placeholder.png" alt="Producto sin imagen">
+    {{/if}}
+  </div>
+
+  <div class="detail-content">
+    <span class="category">{{product.category}}</span>
+
+    <h1>{{product.title}}</h1>
+
+    <p>{{product.description}}</p>
+
+    <p class="price">S/ {{formatPrice product.price}}</p>
+
+    <p>Stock: {{product.stock}}</p>
+
+    <p>
+      Estado:
+      {{#if product.status}}
+        Disponible
+      {{else}}
+        No disponible
+      {{/if}}
+    </p>
+
+    <div class="cart-actions">
+      <label for="quantity">Cantidad</label>
+
+      <div class="quantity-control">
+        <button class="quantity-btn" type="button" id="decreaseQuantity">-</button>
+
+        <input
+          id="quantity"
+          type="number"
+          min="1"
+          max="{{product.stock}}"
+          value="1"
+          data-stock="{{product.stock}}"
+        >
+
+        <button class="quantity-btn" type="button" id="increaseQuantity">+</button>
+      </div>
+
+      <button class="button" id="addToCartButton">Agregar al carrito</button>
+
+      <a class="button secondary hidden" id="viewCartButton" href="#">
+        Ver carrito
+      </a>
+
+      <p id="cartMessage"></p>
+    </div>
+  </div>
+</section>
+
+<script src="/js/products.js"></script>
