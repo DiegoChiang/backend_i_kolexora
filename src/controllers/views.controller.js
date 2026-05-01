@@ -6,7 +6,7 @@ const cartManager = new CartManagerMongo();
 
 const renderProducts = async (req, res, next) => {
   try {
-    const limit = 12;
+    const limit = 10;
 
     const result = await productManager.getProducts({
       ...req.query,
