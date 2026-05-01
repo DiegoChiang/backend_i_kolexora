@@ -2,14 +2,14 @@ const ProductModel = require("../../models/product.model");
 
 class ProductManagerMongo {
   async getProducts({
-    limit = 12,
+    limit = 10,
     page = 1,
     query,
     sort,
     category,
     available,
   } = {}) {
-    const parsedLimit = Number(limit) > 0 ? Number(limit) : 12;
+    const parsedLimit = Number(limit) > 0 ? Number(limit) : 10;
     const parsedPage = Number(page) > 0 ? Number(page) : 1;
 
     const filter = this.buildFilter({ query, category, available });
